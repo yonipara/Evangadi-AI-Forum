@@ -1,0 +1,464 @@
+/**
+ * Dashboard.module.css
+ * Production styling for the Dashboard / Forum Home view.
+ */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+/* ============================================================
+   HERO / BANNER CARD
+   ============================================================ */
+.dashboard__hero {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dashboard__heroCategory {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  color: var(--primary);
+}
+
+.dashboard__heroTitle {
+  font-size: 1.75rem;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-top: -0.5rem;
+}
+
+.dashboard__heroDescription {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 50rem;
+  margin-top: -0.25rem;
+}
+
+/* Quick Action Tiles (Grid 3) */
+.dashboard__actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  margin-top: 0.25rem;
+}
+
+.dashboard__actionCard {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.dashboard__actionCard:hover {
+  border-color: var(--primary-light);
+  background-color: var(--surface-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard__actionCard:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.dashboard__actionIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-md);
+  background-color: #fff7ed; /* Light orange tint */
+  border: 1px solid #ffedd5;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.dashboard__actionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dashboard__actionTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.dashboard__actionSubtitle {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+/* Feed Snapshot Subtitle Note */
+.dashboard__snapshotNote {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+}
+
+/* Metrics / Stat Cards (Grid 4) */
+.dashboard__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+}
+
+.dashboard__statCard {
+  background-color: var(--surface-container-low);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: background-color var(--transition-fast);
+}
+
+.dashboard__statCard:hover {
+  background-color: var(--surface-container-high);
+}
+
+.dashboard__statLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+}
+
+.dashboard__statValue {
+  font-size: 1.5rem;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+/* ============================================================
+   DISCUSSION FEED CARD
+   ============================================================ */
+.dashboard__feed {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__feedHeader {
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.dashboard__feedHeaderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dashboard__feedTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dashboard__feedSubtitle {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.dashboard__feedBadge {
+  background-color: var(--primary);
+  color: var(--text-inverse);
+  font-size: 0.7rem;
+  font-weight: var(--font-bold);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* AI Search mode — same orange family, slightly darker to distinguish */
+.dashboard__feedBadge--semantic {
+  background-color: var(--primary-dark);
+}
+
+/* ============================================================
+   FEED STATES (LOADING / SKELETON / ERROR / EMPTY)
+   ============================================================ */
+.dashboard__stateContainer {
+  padding: 3.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.dashboard__loadingText {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.dashboard__errorBox {
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #ef4444;
+  padding: 2rem 2.5rem;
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  max-width: 32rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dashboard__errorButton {
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  transition: opacity var(--transition-fast);
+}
+
+.dashboard__errorButton:hover {
+  opacity: 0.9;
+}
+
+.dashboard__emptyBox {
+  background-color: var(--surface-container-low);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 3rem;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  max-width: 30rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dashboard__clearButton {
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--primary);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  transition: all var(--transition-fast);
+}
+
+.dashboard__clearButton:hover {
+  background-color: var(--primary-light);
+}
+
+/* ============================================================
+   QUESTION LIST & ITEMS
+   ============================================================ */
+.dashboard__list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  text-decoration: none;
+  background-color: var(--surface);
+  position: relative;
+}
+
+.dashboard__item:last-child {
+  border-bottom: none;
+}
+
+.dashboard__item:hover {
+  background-color: var(--surface-hover);
+}
+
+.dashboard__item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+/* Left orange border accent for user's own questions */
+.dashboard__item--isOwner {
+  border-left: 3px solid var(--primary);
+}
+
+.dashboard__avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  flex-shrink: 0;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.dashboard__contentColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.dashboard__itemTopRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dashboard__itemTitle {
+  font-size: 0.9375rem;
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin: 0;
+  transition: color var(--transition-fast);
+}
+
+.dashboard__item:hover .dashboard__itemTitle {
+  color: var(--primary);
+}
+
+.dashboard__yoursBadge {
+  color: #ea580c;
+  font-size: 0.6875rem;
+  font-weight: var(--font-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.dashboard__itemSnippet {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.dashboard__itemMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 0.2rem;
+}
+
+.dashboard__replyCount {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+}
+
+.dashboard__authorDate {
+  color: var(--text-tertiary);
+}
+
+.dashboard__semanticScore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--primary);
+  font-weight: var(--font-medium);
+}
+
+/* ============================================================
+   RESPONSIVE LAYOUT BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1024px) {
+  .dashboard__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard__hero {
+    padding: 1.25rem 1rem;
+  }
+
+  .dashboard__feedHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard__item {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+}
