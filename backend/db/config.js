@@ -6,6 +6,14 @@ export const db = mysql.createPool({// good for deployment.
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: true
+  },
+  protocol: 'tcp',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 const ensureParams = params => {
